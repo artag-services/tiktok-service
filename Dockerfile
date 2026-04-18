@@ -10,6 +10,6 @@ RUN pnpm prisma:generate
 RUN pnpm build
 
 EXPOSE 3005
-ENTRYPOINT ["/app/entrypoint.sh"]
+ENTRYPOINT ["bash", "/app/entrypoint.sh"]
 CMD ["node", "dist/main"]
 
