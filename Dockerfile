@@ -6,6 +6,7 @@ COPY package.json pnpm-lock.yaml* ./
 RUN pnpm install --frozen-lockfile
 COPY entrypoint.sh ./
 COPY . .
+COPY prisma ./prisma
 RUN pnpm prisma:generate
 RUN pnpm build
 
