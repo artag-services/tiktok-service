@@ -1,3 +1,5 @@
+-- TikTok Service Schema Migration
+
 -- CreateEnum: TikTokPostStatus
 DO $$ BEGIN
     CREATE TYPE "TikTokPostStatus" AS ENUM ('PENDING', 'SENT', 'FAILED');
@@ -5,7 +7,7 @@ EXCEPTION
     WHEN duplicate_object THEN null;
 END $$;
 
--- CreateTikTokPost
+-- CreateTable: TikTokPost
 CREATE TABLE "TikTokPost" (
     "id" TEXT NOT NULL,
     "messageId" TEXT NOT NULL,
@@ -21,3 +23,12 @@ CREATE TABLE "TikTokPost" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
     CONSTRAINT "TikTokPost_pkey" PRIMARY KEY ("id")
 );
+
+-- CreateIndex: TikTokPost.recipient
+CREATE INDEX "TikTokPost_recipient_idx" ON "TikTokPost" ("recipient");
+
+-- CreateIndex: TikTokPost.status
+CREATE INDEX "TikTokPost_status_idx" ON "TikTokPost" ("status");
+
+-- CreateIndex: TikTokPost.createdAt
+CREATE INDEX "TikTokPost_createdAt_idx" ON "TikTokPost" ("createdAt");
